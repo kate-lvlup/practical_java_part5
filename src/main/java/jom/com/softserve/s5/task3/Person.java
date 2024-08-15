@@ -1,11 +1,12 @@
 package jom.com.softserve.s5.task3;
 
 class Person {
-	String name;
-	String surname;
+	public String name;
+	public String surname;
 
-	Person(String name, String surname) {
+	public Person(String name, String surname) {
 		this.name = name;
 		this.surname = surname;
 	}
+
 }
