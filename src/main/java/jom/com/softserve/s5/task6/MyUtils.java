@@ -1,27 +1,32 @@
 package jom.com.softserve.s5.task6;
 
-import java.util.function.Predicate;
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
 class MyUtils {
-	public static int findMaxByCondition(List<Integer> numbers, Predicate<Integer> pr) {
-		 // Write your code here
-		return 0;
-	}
+    public static Integer findMaxByCondition(List<Integer> numbers, Predicate<Integer> pr) {
+        return numbers.stream()
+                .filter(pr)
+                .max((integer, anotherInteger) -> integer.compareTo(anotherInteger))
+                .orElse(null);
+    }
 }
 
 class User {
-	public final List<Integer> values = new ArrayList<Integer>();
 
-	int getFilterdValue(/* arguments */) {
-		 // Write your code here
-		return 0;
-	}
+    public final List<Integer> values = new ArrayList<>();
 
-	int getMaxValueByCondition(Predicate<Integer> predicate) {
-		 // Write your code here
-		return 0;
-	}
+    public int getFilterdValue(BiFunction<List<Integer>, Predicate<Integer>, Integer> function, Predicate<Integer> condition) {
+        return function.apply(values, condition);
+    }
+
+    public int getMaxValueByCondition(Predicate<Integer> condition) {
+        Integer maxByCondition = MyUtils.findMaxByCondition(values, condition);
+        return getFilterdValue(
+                (collection, predicate) -> collection.stream().filter(predicate).max(Integer::compareTo).orElse(null),
+                condition
+        );
+    }
 }
